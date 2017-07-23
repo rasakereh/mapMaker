@@ -1,0 +1,57 @@
+#include "../headers/Cell.h"
+
+std::map <CellType, CellColor> Cell::colorTranslator = {
+                                                            {Cell::DECISION, Cell::RED},
+                                                            {Cell::TREASURE, Cell::ORANGE},
+                                                            {Cell::INITIAL, Cell::BLUE},
+                                                            {Cell::ORDINARY, Cell::GREEN},
+                                                            {Cell::TRANSPORT, Cell::VIOLET},
+                                                        };
+std::map <CellType, std::string> Cell::iconTranslator = {
+                                                            {Cell::DECISION, ":/icons/DecisionCell"},
+                                                            {Cell::TREASURE, ":/icons/TreasureCell"},
+                                                            {Cell::INITIAL, ":/icons/InitialCell"},
+                                                            {Cell::ORDINARY, ":/icons/OrdinaryCell"},
+                                                            {Cell::TRANSPORT, ":/icons/TransportCell"},
+                                                        };
+
+Cell::Cell(Cell::CellType cellType, QWidget *parent): QLabel(parent)
+{
+    this -> setFixedSize(64, 64);
+    this -> cellType = cellType;
+    this -> loadImage();
+    this -> setColor();
+}
+
+void Cell::loadImage()
+{
+    this -> setPixmap(QPixmap(Cell::iconTranslator[this -> cellType]));
+}
+
+void Cell::setColor()
+{
+    this -> cellColor = Cell::colorTranslator[this -> cellType];
+}
+
+bool Cell::addAdjacent(Cell *newCell)
+{
+    this -> adjacentList.push_back(newCell);
+    return true;
+}
+
+bool Cell::removeAdjacent(Cell *oldAdjacent)
+{
+    auto oldAdjacentElement = std::find(this -> adjacentList.begin(), this -> adjacentList.end(), oldAdjacent);
+    if(oldAdjacentElement == this -> adjacentList.end())
+    {
+        return false;
+    }
+    this -> adjacentList.erase(oldAdjacentElement);
+    
+    return true;
+}
+
+void Cell::setCellID(unsigned long long int cellID)
+{
+    this -> cellID = cellID;
+}
