@@ -32,3 +32,26 @@ void Cell::setColor()
 {
     this -> cellColor = Cell::colorTranslator[this -> cellType];
 }
+
+bool Cell::addAdjacent(Cell *newCell)
+{
+    this -> adjacentList.push_back(newCell);
+    return true;
+}
+
+bool Cell::removeAdjacent(Cell *oldAdjacent)
+{
+    auto oldAdjacentElement = std::find(this -> adjacentList.begin(), this -> adjacentList.end(), oldAdjacent);
+    if(oldAdjacentElement == this -> adjacentList.end())
+    {
+        return false;
+    }
+    this -> adjacentList.erase(oldAdjacentElement);
+    
+    return true;
+}
+
+void Cell::setCellID(unsigned long long int cellID)
+{
+    this -> cellID = cellID;
+}
