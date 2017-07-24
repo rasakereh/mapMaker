@@ -1,13 +1,13 @@
 #include "../headers/Cell.h"
 
-std::map <CellType, CellColor> Cell::colorTranslator = {
+std::map <Cell::CellType, Cell::CellColor> Cell::colorTranslator = {
                                                             {Cell::DECISION, Cell::RED},
                                                             {Cell::TREASURE, Cell::ORANGE},
                                                             {Cell::INITIAL, Cell::BLUE},
                                                             {Cell::ORDINARY, Cell::GREEN},
                                                             {Cell::TRANSPORT, Cell::VIOLET},
                                                         };
-std::map <CellType, std::string> Cell::iconTranslator = {
+std::map <Cell::CellType, std::string> Cell::iconTranslator = {
                                                             {Cell::DECISION, ":/icons/DecisionCell"},
                                                             {Cell::TREASURE, ":/icons/TreasureCell"},
                                                             {Cell::INITIAL, ":/icons/InitialCell"},
@@ -25,7 +25,7 @@ Cell::Cell(Cell::CellType cellType, QWidget *parent): QLabel(parent)
 
 void Cell::loadImage()
 {
-    this -> setPixmap(QPixmap(Cell::iconTranslator[this -> cellType]));
+    this -> setPixmap(QPixmap(Cell::iconTranslator[this -> cellType].c_str()));
 }
 
 void Cell::setColor()

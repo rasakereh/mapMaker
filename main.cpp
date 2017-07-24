@@ -1,6 +1,5 @@
 #include <QApplication>
-#include <QHBoxLayout>
-#include "headers/MapDraft.h"
+#include "headers/Worksheet.h"
 
 int main(int argc, char **argv)
 {
@@ -8,13 +7,8 @@ int main(int argc, char **argv)
 
     QApplication app(argc, argv);
 
-    QWidget mainWidget;
-    QHBoxLayout *horizontalLayout = new QHBoxLayout(&mainWidget);
-    horizontalLayout->addWidget(new MapDraft);
-    horizontalLayout->addWidget(new MapDraft);
-
-    mainWidget.setWindowTitle(QObject::tr("Draggable Icons"));
-    mainWidget.show();
-
+    Worksheet worksheet;
+    worksheet.show();
+    
     return app.exec();
 }
