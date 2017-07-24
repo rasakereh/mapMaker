@@ -52,9 +52,10 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     std::vector<Cell*> cells;
 
     //IMPORTANT
-    Cell temp_cell(Cell::ORDINARY, nullptr); // What the phase with this constructor?
+    //Cell temp_cell(Cell::ORDINARY, nullptr); // What the phase with this constructor?
     //IMPORTANT
 
+    Cell* temp = nullptr;
     unsigned long long int size = 0;
     unsigned long long int ID = 0;
     unsigned long long int tempID = 0;
@@ -70,17 +71,19 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
         fread(&what_is_type, sizeof(Cell::CellType), 1, fptr);
         fread(&xPos, sizeof(double), 1, fptr);
         fread(&yPos, sizeof(double), 1, fptr);
-        temp_cell.setCellID(ID);
+        temp = new Cell(what_is_type);
+        cells.push_back(temp);
+        temp->setCellID(ID);
         // I temprorily made this functin friend with Cell class. For escaping from compile errors. :)
         //You, HajReza, may want to set a new function for this action! :)
 
         //And here, there are a lot of functions to be built...
         //setters for: cellType, xPosition, yPosition
         numAdj.push_back(temp_numAdj);
-        temp_cell.setCellType(what_is_type);
-        temp_cell.setXPosition(xPos);
-        temp_cell.setYPosition(yPos);
-        cells.push_back(&temp_cell);//Are we only playing with addresses? This would not return a vector of Cell*.
+        temp->setCellType(what_is_type);
+        temp->setXPosition(xPos);
+        temp->setYPosition(yPos);
+        //cells.push_back(&temp_cell);//Are we only playing with addresses? This would not return a vector of Cell*.
         // There is no copy of information.
         //I think it is better to return a vector of Cell instead of Cell*. Isn't it? :)
         //Also I hope that a vector<Cell> can be passed to saveMap. And loadMap return a vector<Cell>.
