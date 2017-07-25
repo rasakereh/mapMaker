@@ -77,7 +77,7 @@ const Cell::CellType &Cell::getCellType()
     return this -> cellType;
 }
 
-const int &Cell::getCellID()
+const unsigned long long &Cell::getCellID()
 {
     return this -> cellID;
 }

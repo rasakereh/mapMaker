@@ -19,7 +19,7 @@ public:
     Cell(CellType cellType, QWidget *parent = nullptr);
     const std::vector<Cell *> &getAdjacentList();
     const CellType &getCellType();
-    const int &getCellID();
+    const unsigned long long int &getCellID();
     const double &getXPos();
     const double &getYPos();
     

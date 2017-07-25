@@ -41,7 +41,7 @@ void SaverLoader::saveMap(std::string file_name, std::vector<Cell*> cells){
     for(unsigned long long int i = 0 ; i < size ; i++){
         adjacent_list = cells[i]->getAdjacentList();
         for(int j = 0 ; j < numAdj ; j++){
-            tempAdjID = adjacent_list[j]->getID();
+            tempAdjID = adjacent_list[j]->getCellID();
             fwrite( &tempAdjID, sizeof(unsigned long long int), 1, fptr );
         }
     }
@@ -82,7 +82,6 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
         //And here, there are a lot of functions to be built...
         //setters for: cellType, xPosition, yPosition
         numAdj.push_back(temp_numAdj);
-        temp->setCellType(what_is_type);
         temp->setPos(xPos, yPos);
 
         //cells.push_back(&temp_cell);//Are we only playing with addresses? This would not return a vector of Cell*.
@@ -93,7 +92,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     for(unsigned long long int i = 0 ; i < size ; i++){
         for(int j = 0 ; j < numAdj.at(i) ; j++){
             fread(&tempID, sizeof(unsigned long long int), 1, fptr);
-            auto it = std::find_if(cells.begin(), cells.end(), [&tempID](Cell* goal) {return goal->getID() == tempID;});
+            auto it = std::find_if(cells.begin(), cells.end(), [&tempID](Cell* goal) {return goal->getCellID() == tempID;});
             cells.at(i)->addAdjacent(*it);
         }
     }
