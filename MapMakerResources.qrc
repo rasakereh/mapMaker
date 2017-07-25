@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>icons/DecisionCell.png</file>
-        <file>icons/InitialCell.png</file>
-        <file>icons/OrdinaryCell.png</file>
-        <file>icons/TransportCell.png</file>
-        <file>icons/TreasureCell.png</file>
-    </qresource>
-</RCC>
