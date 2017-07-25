@@ -24,12 +24,12 @@ void SaverLoader::saveMap(std::string file_name, std::vector<Cell*> cells){
 
         //Here, there are a lot of functions to be built...
         //getters for: adjacentList, cellType, xPosition, yPosition.
-        ID = cells[i] -> getID();
+        ID = cells[i] -> getCellID();
         adjacent_list = cells[i] -> getAdjacentList();
         numAdj = adjacent_list.size();
         what_is_type = cells[i] -> getCellType();
-        xPos = cells[i] -> getxPos();
-        yPos = cells[i] -> getyPos();
+        xPos = cells[i] -> getXPos();
+        yPos = cells[i] -> getYPos();
 
         fwrite(&ID, sizeof(unsigned long long int), 1, fptr);
         fwrite(&numAdj, sizeof(int), 1, fptr);
@@ -39,8 +39,9 @@ void SaverLoader::saveMap(std::string file_name, std::vector<Cell*> cells){
 
     } //End of loop  (for writing properties of a Cell)
     for(unsigned long long int i = 0 ; i < size ; i++){
+        adjacent_list = cells[i]->getAdjacentList();
         for(int j = 0 ; j < numAdj ; j++){
-            tempAdjID = adjacent_list.at(j)->getID();
+            tempAdjID = adjacent_list[j]->getID();
             fwrite( &tempAdjID, sizeof(unsigned long long int), 1, fptr );
         }
     }
@@ -66,6 +67,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     Cell::CellType what_is_type = Cell::ORDINARY;
     fread(&size, sizeof(unsigned long long int), 1, fptr);
     for(unsigned long long int i = 0 ; i < size ; i++){
+
         fread(&ID, sizeof(unsigned long long int), 1, fptr);
         fread(&temp_numAdj, sizeof(int), 1, fptr);
         fread(&what_is_type, sizeof(Cell::CellType), 1, fptr);
@@ -81,8 +83,8 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
         //setters for: cellType, xPosition, yPosition
         numAdj.push_back(temp_numAdj);
         temp->setCellType(what_is_type);
-        temp->setXPosition(xPos);
-        temp->setYPosition(yPos);
+        temp->setPos(xPos, yPos);
+
         //cells.push_back(&temp_cell);//Are we only playing with addresses? This would not return a vector of Cell*.
         // There is no copy of information.
         //I think it is better to return a vector of Cell instead of Cell*. Isn't it? :)
