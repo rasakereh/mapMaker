@@ -21,6 +21,7 @@ public:
     void Connector();
     void Save();
     std::vector<Cell *> Load();
+    MapDraft defaultDraft;
 
 private:
     Ui::MainWindow *ui;
