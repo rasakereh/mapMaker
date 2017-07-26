@@ -19,6 +19,8 @@ public:
     ~MainWindow();
     typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE} CellType;
     void Connector();
+    void Save();
+    std::vector<Cell *> Load();
 
 private:
     Ui::MainWindow *ui;

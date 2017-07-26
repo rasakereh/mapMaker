@@ -162,10 +162,28 @@ void MapDraft::handleDragDrop(QMouseEvent *event)
 
 void MapDraft::handleAddCell(QMouseEvent *event, Cell::CellType cellType)
 {
+    QLabel *child = static_cast<QLabel*>(childAt(event->pos()));
+    if (child)
+        return;
+    this -> addCell(event->x(), event->y(), cellType);
+}
 
+void MapDraft::addCell(int posX, int posY, Cell::CellType cellType)
+{
     Cell *cellIcon = new Cell(cellType,this);
+    cellIcon->setPos(posX - WIDTHCELL/2, posY-HEIGHTCELL/2);
     this->cells.push_back(cellIcon);
-    cellIcon->move(event->x()-WIDTHCELL/2, event->y()-HEIGHTCELL/2);
+    cellIcon->move(posX - WIDTHCELL/2, posY-HEIGHTCELL/2);
     cellIcon->show();
     cellIcon->setAttribute(Qt::WA_DeleteOnClose);
+}
+
+std::vector<Cell *> MapDraft::getAllCell()
+{
+    return this -> cells;
+}
+
+void MapDraft::setAllCell(std::vector<Cell *> inputList)
+{
+    this->cells = inputList;
 }

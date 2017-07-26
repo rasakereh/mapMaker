@@ -9,7 +9,7 @@ SaverLoader::SaverLoader()
 
 }
 
-void SaverLoader::saveMap(std::string file_name, std::vector<Cell*> cells){
+void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cells){
     const char* char_file_name = file_name.c_str(); //convert cpp string to a char*
     FILE* fptr = fopen(char_file_name,"w");   //Opens file for writing
     unsigned long long int size = cells.size();        // total number of cells

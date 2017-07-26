@@ -56,14 +56,22 @@
 
 class QDragEnterEvent;
 class QDropEvent;
+class MainWindow
+//{std::vector<Cell*> Load();}
+        ;
 
 class MapDraft : public QFrame
 {
+    //friend std::vector<Cell*> MainWindow::Load();
+    friend class MainWindow;
 private:
     std::vector <Cell *> cells;
     void handleDragDrop(QMouseEvent *event);
     void handleAddCell(QMouseEvent *event, Cell::CellType cellType);
+    void addCell(int posX, int posY, Cell::CellType cellType);
 public:
+    std::vector<Cell *> getAllCell();
+    void setAllCell(std::vector<Cell *> inputList);
     MapDraft(QWidget *parent = 0);
     Cell::CellType current_choice = Cell::NOTYPE;
 protected:

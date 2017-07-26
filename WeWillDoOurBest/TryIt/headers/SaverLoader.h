@@ -12,7 +12,7 @@ private:
 
 public:
     SaverLoader();
-    void saveMap(std::string file_name, std::vector<Cell*> cells);
+    void saveMap(std::string file_name, const std::vector<Cell*> & cells);
     std::vector<Cell*> loadMap(std::string file_name);
 };
 

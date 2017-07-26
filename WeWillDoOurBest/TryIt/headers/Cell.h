@@ -12,9 +12,12 @@
 #define WIDTHCELL 32
 #define HEIGHTCELL 32
 
+class MapDraft;
+
 class Cell: public QLabel
 {
 friend std::vector<Cell*> SaverLoader::loadMap(std::string file_name);
+friend class MapDraft;
 
 public:
     typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE} CellType;
