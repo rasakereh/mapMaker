@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include "headers/MapDraft.h"
+#include <vector>
 
 namespace Ui {
 class MainWindow;
@@ -15,7 +17,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QString current_choice = "";
+    typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE} CellType;
     void Connector();
 
 private:

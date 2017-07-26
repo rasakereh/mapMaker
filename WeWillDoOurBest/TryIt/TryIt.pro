@@ -26,19 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    src/cell.cpp \
     src/MapDraft.cpp \
     src/SaverLoader.cpp \
-    src/toolbar.cpp \
-    src/worksheet.cpp
+    src/Cell.cpp
 
 HEADERS += \
         mainwindow.h \
     headers/Cell.h \
     headers/MapDraft.h \
     headers/SaverLoader.h \
-    headers/Toolbar.h \
-    headers/Worksheet.h
 
 FORMS += \
         mainwindow.ui

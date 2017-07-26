@@ -17,7 +17,10 @@ std::map <Cell::CellType, std::string> Cell::iconTranslator = {
 
 Cell::Cell(Cell::CellType cellType, QWidget *parent): QLabel(parent)
 {
-    this -> setFixedSize(64, 64);
+    int width = WIDTHCELL;
+    int height = HEIGHTCELL;
+    this -> setFixedSize(width, height);
+    this -> setScaledContents(true);
     this -> cellType = cellType;
     this -> loadImage();
     this -> setColor();

@@ -7,15 +7,17 @@
 #include <vector>
 
 #include <QLabel>
-
 #include "SaverLoader.h"
+
+#define WIDTHCELL 32
+#define HEIGHTCELL 32
 
 class Cell: public QLabel
 {
 friend std::vector<Cell*> SaverLoader::loadMap(std::string file_name);
 
 public:
-    typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT} CellType;
+    typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE} CellType;
     Cell(CellType cellType, QWidget *parent = nullptr);
     const std::vector<Cell *> &getAdjacentList();
     const CellType &getCellType();

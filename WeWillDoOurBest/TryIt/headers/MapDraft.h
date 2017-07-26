@@ -51,15 +51,21 @@
 #define MAPDRAFT_H
 
 #include <QtWidgets>
+#include "Cell.h"
+#include <vector>
 
 class QDragEnterEvent;
 class QDropEvent;
 
 class MapDraft : public QFrame
 {
+private:
+    std::vector <Cell *> cells;
+    void handleDragDrop(QMouseEvent *event);
+    void handleAddCell(QMouseEvent *event, Cell::CellType cellType);
 public:
     MapDraft(QWidget *parent = 0);
-
+    Cell::CellType current_choice = Cell::NOTYPE;
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;

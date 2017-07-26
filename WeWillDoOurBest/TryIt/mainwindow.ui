@@ -6,26 +6,41 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>705</width>
-    <height>465</height>
+    <width>858</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>190</x>
       <y>0</y>
       <width>464</width>
-      <height>31</height>
+      <height>41</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
      <item>
       <widget class="QPushButton" name="ordinaryCell_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Ordinary Cell</string>
        </property>
@@ -37,6 +52,15 @@
      </item>
      <item>
       <widget class="QPushButton" name="treasureCell_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Treasure Cell</string>
        </property>
@@ -48,6 +72,15 @@
      </item>
      <item>
       <widget class="QPushButton" name="initialCell_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Initial Cell</string>
        </property>
@@ -59,6 +92,15 @@
      </item>
      <item>
       <widget class="QPushButton" name="decisionCell_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Decision Cell</string>
        </property>
@@ -70,6 +112,15 @@
      </item>
      <item>
       <widget class="QPushButton" name="transportCell_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Transport Cell</string>
        </property>
@@ -81,14 +132,20 @@
      </item>
     </layout>
    </widget>
-   <widget class="QFrame" name="mapDraft_frm">
+   <widget class="MapDraft" name="mapDraft_frm">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>40</y>
-      <width>601</width>
-      <height>241</height>
+      <x>70</x>
+      <y>50</y>
+      <width>711</width>
+      <height>331</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="palette">
      <palette>
@@ -505,31 +562,31 @@
       </disabled>
      </palette>
     </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
     <property name="autoFillBackground">
      <bool>true</bool>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
-    </property>
-    <property name="lineWidth">
-     <number>1</number>
     </property>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>320</y>
-      <width>221</width>
+      <x>350</x>
+      <y>410</y>
+      <width>141</width>
       <height>71</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QPushButton" name="save_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>&amp;Save...</string>
        </property>
@@ -537,6 +594,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="load_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>&amp;Load...</string>
        </property>
@@ -550,7 +613,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>705</width>
+     <width>858</width>
      <height>21</height>
     </rect>
    </property>
@@ -562,29 +625,21 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MapDraft</class>
+   <extends>QFrame</extends>
+   <header>headers/MapDraft.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="mapmakerresources.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>ordinaryCell_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>144</x>
-     <y>46</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>48</x>
-     <y>44</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

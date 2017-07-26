@@ -55,12 +55,6 @@ MapDraft::MapDraft(QWidget *parent): QFrame(parent)
     setMinimumSize(200, 200);
     setFrameStyle(QFrame::Sunken | QFrame::StyledPanel);
     setAcceptDrops(true);
-
-    QLabel *cellIcon = new QLabel(this);
-    cellIcon->setPixmap(QPixmap(":/icons/DecisionCell.png"));
-    cellIcon->move(10, 10);
-    cellIcon->show();
-    cellIcon->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void MapDraft::dragEnterEvent(QDragEnterEvent *event)
@@ -120,6 +114,18 @@ void MapDraft::dropEvent(QDropEvent *event)
 
 void MapDraft::mousePressEvent(QMouseEvent *event)
 {
+    if(this -> current_choice == Cell::NOTYPE){
+        this -> handleDragDrop(event);
+        return;
+    }
+    else{
+        this -> handleAddCell(event, current_choice);
+    }
+
+}
+
+void MapDraft::handleDragDrop(QMouseEvent *event)
+{
     QLabel *child = static_cast<QLabel*>(childAt(event->pos()));
     if (!child)
         return;
@@ -152,4 +158,14 @@ void MapDraft::mousePressEvent(QMouseEvent *event)
         child->show();
         child->setPixmap(pixmap);
     }
+}
+
+void MapDraft::handleAddCell(QMouseEvent *event, Cell::CellType cellType)
+{
+
+    Cell *cellIcon = new Cell(cellType,this);
+    this->cells.push_back(cellIcon);
+    cellIcon->move(event->x()-WIDTHCELL/2, event->y()-HEIGHTCELL/2);
+    cellIcon->show();
+    cellIcon->setAttribute(Qt::WA_DeleteOnClose);
 }
