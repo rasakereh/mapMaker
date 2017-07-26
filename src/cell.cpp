@@ -55,3 +55,39 @@ void Cell::setCellID(unsigned long long int cellID)
 {
     this -> cellID = cellID;
 }
+
+void Cell::setAdjacentList(const std::vector<Cell *> &adjacentList)
+{
+    this -> adjacentList = adjacentList;
+}
+
+void Cell::setPos(const double &xPos, const double &yPos)
+{
+    this -> xPosition = xPos;
+    this -> yPosition = yPos;
+}
+
+const std::vector<Cell *> &Cell::getAdjacentList()
+{
+    return this -> adjacentList;
+}
+
+const Cell::CellType &Cell::getCellType()
+{
+    return this -> cellType;
+}
+
+const int &Cell::getCellID()
+{
+    return this -> cellID;
+}
+
+const double &Cell::getXPos()
+{
+    return this -> xPosition;
+}
+
+const double &Cell::getYPos()
+{
+    return this -> yPosition;
+}
