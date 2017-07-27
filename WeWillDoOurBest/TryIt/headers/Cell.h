@@ -42,6 +42,7 @@ private:
     void setCellID(unsigned long long int cellID);
     void setColor();
     void loadImage();
+    void highlight();
     bool addAdjacent(Cell *newAdjacent);
     bool removeAdjacent(Cell *oldAdjacent);
     void setAdjacentList(const std::vector<Cell *> &adjacentList);

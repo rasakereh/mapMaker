@@ -36,6 +36,14 @@ void Cell::setColor()
     this -> cellColor = Cell::colorTranslator[this -> cellType];
 }
 
+void Cell::highlight()
+{
+    this -> hide();
+    this -> setPixmap(QPixmap(":/icons/highlight"));
+    this -> show();
+    //this -> repaint();
+}
+
 bool Cell::addAdjacent(Cell *newCell)
 {
     this -> adjacentList.push_back(newCell);

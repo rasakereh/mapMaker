@@ -7,5 +7,6 @@
         <file>icons/TreasureCell.png</file>
         <file>icons/Delete.png</file>
         <file>icons/SelectionTool.png</file>
+        <file>icons/highlight.png</file>
     </qresource>
 </RCC>

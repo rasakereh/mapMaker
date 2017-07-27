@@ -38,6 +38,9 @@ void MainWindow::Connector()
     QObject::connect(this -> ui -> delete_button, &QPushButton::clicked,
                      [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::DELETE_CELL;} );
 
+    QObject::connect(this -> ui -> connect_button, &QPushButton::clicked,
+                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::CONNECT_CELL;} );
+
     QObject::connect(this -> ui -> save_button, &QPushButton::clicked,
                      [&](){this->Save();});
 

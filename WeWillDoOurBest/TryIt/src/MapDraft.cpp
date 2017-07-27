@@ -55,6 +55,7 @@ MapDraft::MapDraft(QWidget *parent): QFrame(parent)
     setMinimumSize(200, 200);
     setFrameStyle(QFrame::Sunken | QFrame::StyledPanel);
     setAcceptDrops(true);
+    this -> last_choice = nullptr;
 }
 
 void MapDraft::dragEnterEvent(QDragEnterEvent *event)
@@ -120,6 +121,9 @@ void MapDraft::mousePressEvent(QMouseEvent *event)
     }
     else if(this -> current_choice == MapDraft::DELETE_CELL){
         this -> handleDeleteCell(event);
+    }
+    else if(this -> current_choice == MapDraft::CONNECT_CELL){
+        this -> handleConnectCell(event);
     }
     else{
         this -> handleAddCell(event, (Cell::CellType)current_choice);
@@ -197,6 +201,24 @@ void MapDraft::deleteCell(Cell *child)
         this -> cells.erase(child_it);
         for_each(this -> cells.begin(), this -> cells.end(), [&child](Cell *item){item -> removeAdjacent(child);});
         child -> close();
+    }
+}
+
+void MapDraft::handleConnectCell(QMouseEvent *event)
+{
+    Cell *child = static_cast<Cell*>(childAt(event->pos()));
+    if(!child)
+        return;
+    if (this -> last_choice == nullptr){
+        this -> last_choice = child;
+        this -> last_choice -> highlight();
+    }
+    else
+    {
+        this -> last_choice -> addAdjacent(child);
+        child -> addAdjacent(this -> last_choice);
+        this -> last_choice -> loadImage();
+        this -> last_choice = nullptr;
     }
 }
 

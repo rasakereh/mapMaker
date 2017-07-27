@@ -56,13 +56,10 @@
 
 class QDragEnterEvent;
 class QDropEvent;
-class MainWindow
-//{std::vector<Cell*> Load();}
-        ;
+class MainWindow;
 
 class MapDraft : public QFrame
 {
-    //friend std::vector<Cell*> MainWindow::Load();
     friend class MainWindow;
 private:
     std::vector <Cell *> cells;
@@ -70,9 +67,11 @@ private:
     void handleAddCell(QMouseEvent *event, Cell::CellType cellType);
     void addCell(int posX, int posY, Cell::CellType cellType);
     void handleDeleteCell(QMouseEvent *event);
+    void handleConnectCell(QMouseEvent *event);
     void deleteCell(Cell *cell);
+    Cell* last_choice;
 public:
-    typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE, DELETE_CELL} ActionType;
+    typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE, DELETE_CELL, CONNECT_CELL} ActionType;
     std::vector<Cell *> getAllCell();
     void setAllCell(std::vector<Cell *> inputList);
     MapDraft(QWidget *parent = 0);
