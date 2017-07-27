@@ -1,5 +1,5 @@
 #include "../headers/MapDraft.h"
-
+#include <QPainter>
 /****************************************************************************
 **
 ** Copyright (C) 2016 The Qt Company Ltd.
@@ -116,7 +116,7 @@ void MapDraft::dropEvent(QDropEvent *event)
 void MapDraft::mousePressEvent(QMouseEvent *event)
 {
     if(this -> current_choice == MapDraft::NOTYPE){
-        this -> handleDragDrop(event);
+        //this -> handleDragDrop(event);
         return;
     }
     else if(this -> current_choice == MapDraft::DELETE_CELL){
@@ -225,6 +225,16 @@ void MapDraft::handleConnectCell(QMouseEvent *event)
     }
     else
     {
+        //QLine* line = new QLine(this->last_choice->pos(), child->pos());
+        //QPainter p(this);
+        //p.setRenderHint(QPainter::Antialiasing);
+        //p.setPen(QPen(Qt::black, 12, Qt::DotLine, Qt::RoundCap));
+        //p.drawLine(*line);
+        //p.end();
+
+        //QPaintEngine* u = this->paintEngine();
+        //u->drawLines(line, 1);
+
         this -> last_choice -> addAdjacent(child);
         child -> addAdjacent(this -> last_choice);
         this -> last_choice -> loadImage();
@@ -232,12 +242,17 @@ void MapDraft::handleConnectCell(QMouseEvent *event)
     }
 }
 
-std::vector<Cell *> MapDraft::getAllCell()
+void MapDraft::handleDisconnectCell(QMouseEvent *event)
+{
+
+}
+
+const std::vector<Cell *> &MapDraft::getAllCell()
 {
     return this -> cells;
 }
 
-void MapDraft::setAllCell(std::vector<Cell *> inputList)
+void MapDraft::setAllCell(const std::vector<Cell *> &inputList)
 {
     this->cells = inputList;
 }

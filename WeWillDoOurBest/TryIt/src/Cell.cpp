@@ -38,10 +38,7 @@ void Cell::setColor()
 
 void Cell::highlight()
 {
-    this -> hide();
     this -> setPixmap(QPixmap(":/icons/highlight"));
-    this -> show();
-    //this -> repaint();
 }
 
 bool Cell::addAdjacent(Cell *newCell)
@@ -72,7 +69,7 @@ void Cell::setAdjacentList(const std::vector<Cell *> &adjacentList)
     this -> adjacentList = adjacentList;
 }
 
-void Cell::setPos(const double &xPos, const double &yPos)
+void Cell::setPos(const int &xPos, const int &yPos)
 {
     this -> xPosition = xPos;
     this -> yPosition = yPos;
@@ -93,12 +90,12 @@ const unsigned long long &Cell::getCellID()
     return this -> cellID;
 }
 
-const double &Cell::getXPos()
+const int &Cell::getXPos()
 {
     return this -> xPosition;
 }
 
-const double &Cell::getYPos()
+const int &Cell::getYPos()
 {
     return this -> yPosition;
 }

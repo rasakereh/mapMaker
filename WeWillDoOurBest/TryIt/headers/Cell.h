@@ -25,8 +25,8 @@ public:
     const std::vector<Cell *> &getAdjacentList();
     const CellType &getCellType();
     const unsigned long long int &getCellID();
-    const double &getXPos();
-    const double &getYPos();
+    const int &getXPos();
+    const int &getYPos();
     
 private:
     typedef enum{GREEN, ORANGE, BLUE, RED, VIOLET} CellColor;
@@ -34,7 +34,7 @@ private:
     static std::map <CellType, std::string> iconTranslator;
     
     unsigned long long int cellID;
-    double xPosition, yPosition;
+    int xPosition, yPosition;
     CellType cellType;
     CellColor cellColor;
     std::vector<Cell *> adjacentList;
@@ -46,7 +46,7 @@ private:
     bool addAdjacent(Cell *newAdjacent);
     bool removeAdjacent(Cell *oldAdjacent);
     void setAdjacentList(const std::vector<Cell *> &adjacentList);
-    void setPos(const double &xPos, const double &yPos);
+    void setPos(const int &xPos, const int &yPos);
     
     
 };

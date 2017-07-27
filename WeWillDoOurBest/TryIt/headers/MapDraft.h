@@ -72,8 +72,8 @@ private:
     Cell* last_choice;
 public:
     typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE, DELETE_CELL, CONNECT_CELL} ActionType;
-    std::vector<Cell *> getAllCell();
-    void setAllCell(std::vector<Cell *> inputList);
+    const std::vector<Cell *> &getAllCell();
+    void setAllCell(const std::vector<Cell *> &inputList);
     MapDraft(QWidget *parent = 0);
     MapDraft::ActionType current_choice = MapDraft::NOTYPE;
 protected:

@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "headers/MapDraft.h"
@@ -45,7 +47,7 @@ void MainWindow::Connector()
                      [&](){this->Save();});
 
     QObject::connect(this -> ui -> load_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->setAllCell( this -> Load() ) ;});
+                     [&](){this -> Load();});
 }
 
 void MainWindow::Save()
@@ -60,11 +62,11 @@ std::vector<Cell *> MainWindow::Load()
     SaverLoader sl;
     QString name = QFileDialog::getOpenFileName();
     std::vector<Cell *> result = sl.loadMap(name.toStdString());
-    //for(auto it = this->ui->mapDraft_frm->cells.begin() ; it != this->ui->mapDraft_frm->cells.end() ; it++){
-      //  delete(*it);
-    //}
+    for(auto it = this->ui->mapDraft_frm->cells.end() - 1 ; it != this->ui->mapDraft_frm->cells.begin() - 1 ; it--){
+        this -> ui -> mapDraft_frm -> deleteCell(*it);
+    }
     for(auto it = result.begin() ; it != result.end() ; it++ ){
-        this -> ui -> mapDraft_frm -> addCell((*it)->getXPos(), (*it)->getYPos(), (*it)->getCellType());
+        this -> ui -> mapDraft_frm -> addCell((*it)->getXPos() + WIDTHCELL/2, (*it)->getYPos() + HEIGHTCELL/2, (*it)->getCellType());
     }
     return result;
 }

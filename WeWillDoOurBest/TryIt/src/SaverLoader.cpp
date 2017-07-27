@@ -17,7 +17,7 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
     unsigned long long int tempAdjID = 0;
     std::vector<Cell*> adjacent_list;   // list of adjacents to a cell
     int numAdj = 0;         // number of neighbours
-    double xPos = 0 , yPos = 0;         // Coordinates
+    int xPos = 0 , yPos = 0;         // Coordinates
     Cell::CellType what_is_type = Cell::ORDINARY;   //type of a cell
     fwrite(&size, sizeof(unsigned long long int), 1, fptr);
     for(unsigned long long int i = 0 ; i < size ; i++){    //a loop for writing whole of cells
@@ -34,8 +34,8 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
         fwrite(&ID, sizeof(unsigned long long int), 1, fptr);
         fwrite(&numAdj, sizeof(int), 1, fptr);
         fwrite(&what_is_type, sizeof(Cell::CellType), 1, fptr);
-        fwrite(&xPos, sizeof(double), 1, fptr);
-        fwrite(&yPos, sizeof(double), 1, fptr);
+        fwrite(&xPos, sizeof(int), 1, fptr);
+        fwrite(&yPos, sizeof(int), 1, fptr);
 
     } //End of loop  (for writing properties of a Cell)
     for(unsigned long long int i = 0 ; i < size ; i++){
@@ -45,6 +45,7 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
             fwrite( &tempAdjID, sizeof(unsigned long long int), 1, fptr );
         }
     }
+    fclose(fptr);
 } //End of saving function
 
 std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
@@ -63,7 +64,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     std::vector<Cell*> adjacent_list;
     std::vector<int> numAdj;
     int temp_numAdj = 0;
-    double xPos = 0 , yPos = 0;
+    int xPos = 0 , yPos = 0;
     Cell::CellType what_is_type = Cell::ORDINARY;
     fread(&size, sizeof(unsigned long long int), 1, fptr);
     for(unsigned long long int i = 0 ; i < size ; i++){
@@ -71,8 +72,8 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
         fread(&ID, sizeof(unsigned long long int), 1, fptr);
         fread(&temp_numAdj, sizeof(int), 1, fptr);
         fread(&what_is_type, sizeof(Cell::CellType), 1, fptr);
-        fread(&xPos, sizeof(double), 1, fptr);
-        fread(&yPos, sizeof(double), 1, fptr);
+        fread(&xPos, sizeof(int), 1, fptr);
+        fread(&yPos, sizeof(int), 1, fptr);
         temp = new Cell(what_is_type);
         cells.push_back(temp);
         temp->setCellID(ID);
@@ -96,5 +97,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
             cells.at(i)->addAdjacent(*it);
         }
     }
+    fclose(fptr);
+
     return cells;
 }
