@@ -60,6 +60,9 @@ std::vector<Cell *> MainWindow::Load()
     SaverLoader sl;
     QString name = QFileDialog::getOpenFileName();
     std::vector<Cell *> result = sl.loadMap(name.toStdString());
+    //for(auto it = this->ui->mapDraft_frm->cells.begin() ; it != this->ui->mapDraft_frm->cells.end() ; it++){
+      //  delete(*it);
+    //}
     for(auto it = result.begin() ; it != result.end() ; it++ ){
         this -> ui -> mapDraft_frm -> addCell((*it)->getXPos(), (*it)->getYPos(), (*it)->getCellType());
     }

@@ -178,11 +178,21 @@ void MapDraft::handleAddCell(QMouseEvent *event, Cell::CellType cellType)
 void MapDraft::addCell(int posX, int posY, Cell::CellType cellType)
 {
     Cell *cellIcon = new Cell(cellType,this);
+    auto it = this->cells.end();
+    unsigned long long int newID = 0;
+    if(this->cells.begin() != this->cells.end()){
+        it--;
+        newID = (*it)->getCellID() + 1;
+    }
+    else{
+        newID = 0;
+    }
+    cellIcon->setCellID(newID);
     cellIcon->setPos(posX - WIDTHCELL/2, posY-HEIGHTCELL/2);
-    this->cells.push_back(cellIcon);
     cellIcon->move(posX - WIDTHCELL/2, posY-HEIGHTCELL/2);
     cellIcon->show();
     cellIcon->setAttribute(Qt::WA_DeleteOnClose);
+    this->cells.push_back(cellIcon);
 }
 
 void MapDraft::handleDeleteCell(QMouseEvent *event)
