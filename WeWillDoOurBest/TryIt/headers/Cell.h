@@ -18,6 +18,7 @@ class Cell: public QLabel
 {
 friend std::vector<Cell*> SaverLoader::loadMap(std::string file_name);
 friend class MapDraft;
+friend class MainWindow;
 
 public:
     typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE} CellType;
@@ -43,6 +44,7 @@ private:
     void setColor();
     void loadImage();
     void highlight();
+    void normalize();
     bool addAdjacent(Cell *newAdjacent);
     bool removeAdjacent(Cell *oldAdjacent);
     void setAdjacentList(const std::vector<Cell *> &adjacentList);

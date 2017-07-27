@@ -68,10 +68,12 @@ private:
     void addCell(int posX, int posY, Cell::CellType cellType);
     void handleDeleteCell(QMouseEvent *event);
     void handleConnectCell(QMouseEvent *event);
+    void handleDisconnectCell(QMouseEvent *event);
     void deleteCell(Cell *cell);
     Cell* last_choice;
 public:
-    typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE, DELETE_CELL, CONNECT_CELL} ActionType;
+    typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT,
+                 NOTYPE, DELETE_CELL, CONNECT_CELL, DISCONNECT_CELL} ActionType;
     const std::vector<Cell *> &getAllCell();
     void setAllCell(const std::vector<Cell *> &inputList);
     MapDraft(QWidget *parent = 0);

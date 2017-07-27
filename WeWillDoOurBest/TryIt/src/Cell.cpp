@@ -41,6 +41,11 @@ void Cell::highlight()
     this -> setPixmap(QPixmap(":/icons/highlight"));
 }
 
+void Cell::normalize()
+{
+    this -> loadImage();
+}
+
 bool Cell::addAdjacent(Cell *newCell)
 {
     this -> adjacentList.push_back(newCell);

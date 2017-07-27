@@ -116,14 +116,20 @@ void MapDraft::dropEvent(QDropEvent *event)
 void MapDraft::mousePressEvent(QMouseEvent *event)
 {
     if(this -> current_choice == MapDraft::NOTYPE){
-        //this -> handleDragDrop(event);
+        this -> handleDragDrop(event);
         return;
     }
     else if(this -> current_choice == MapDraft::DELETE_CELL){
         this -> handleDeleteCell(event);
+        return;
     }
     else if(this -> current_choice == MapDraft::CONNECT_CELL){
         this -> handleConnectCell(event);
+        return;
+    }
+    else if(this -> current_choice == MapDraft::DISCONNECT_CELL){
+        this -> handleDisconnectCell(event);
+        return;
     }
     else{
         this -> handleAddCell(event, (Cell::CellType)current_choice);
@@ -234,6 +240,7 @@ void MapDraft::handleConnectCell(QMouseEvent *event)
 
         //QPaintEngine* u = this->paintEngine();
         //u->drawLines(line, 1);
+        //if(std::find_if())                    //Because temprorily we can not draw a line
 
         this -> last_choice -> addAdjacent(child);
         child -> addAdjacent(this -> last_choice);
@@ -244,7 +251,19 @@ void MapDraft::handleConnectCell(QMouseEvent *event)
 
 void MapDraft::handleDisconnectCell(QMouseEvent *event)
 {
-
+    Cell *child = static_cast<Cell*>(childAt(event->pos()));
+    if(!child)
+        return;
+    if (this -> last_choice == nullptr){
+        this -> last_choice = child;
+        this -> last_choice -> highlight();
+    }
+    else{
+        this -> last_choice -> removeAdjacent(child);
+        child -> removeAdjacent(this -> last_choice);
+        this -> last_choice -> loadImage();
+        this -> last_choice = nullptr;
+    }
 }
 
 const std::vector<Cell *> &MapDraft::getAllCell()
