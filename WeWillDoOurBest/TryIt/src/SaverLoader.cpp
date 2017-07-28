@@ -24,7 +24,7 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
     int xPos = 0 , yPos = 0;         // Coordinates
     Cell::CellType what_is_type = Cell::ORDINARY;   //type of a cell
     fwrite(&size, sizeof(unsigned long long int), 1, fptr);
-    qDebug() << size;
+    //qDebug() << size;
     for(unsigned long long int i = 0 ; i < size ; i++){    //a loop for writing whole of cells
 
         //Here, there are a lot of functions to be built...
@@ -38,19 +38,19 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
         xPos = cells[i] -> getXPos();
         yPos = cells[i] -> getYPos();
 
-        qDebug() << ID << ", " << numAdj << ", " << castCellType;
+
         fwrite(&ID, sizeof(unsigned long long int), 1, fptr);
-        fwrite(&numAdj, sizeof(int), 1, fptr);
+        fwrite(&temp_numAdj, sizeof(int), 1, fptr);
         fwrite(&castCellType, sizeof(int), 1, fptr);
         fwrite(&xPos, sizeof(int), 1, fptr);
         fwrite(&yPos, sizeof(int), 1, fptr);
-
+        //qDebug() << ID << ", " << temp_numAdj << ", " << castCellType;
     } //End of loop  (for writing properties of a Cell)
     for(unsigned long long int i = 0 ; i < size ; i++){
         adjacent_list = cells[i]->getAdjacentList();
         for(int j = 0 ; j < numAdj[i] ; j++){
             tempAdjID = adjacent_list[j]->getCellID();
-            qDebug() << i << ", " << tempAdjID;
+            //qDebug() << i << ", " << tempAdjID;
             fwrite( &tempAdjID, sizeof(unsigned long long int), 1, fptr );
         }
     }
@@ -77,7 +77,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     int castCellType = 0;
     Cell::CellType what_is_type = Cell::ORDINARY;
     fread(&size, sizeof(unsigned long long int), 1, fptr);
-    qDebug() << size;
+    //qDebug() << size;
     for(unsigned long long int i = 0 ; i < size ; i++){
 
         fread(&ID, sizeof(unsigned long long int), 1, fptr);
@@ -99,7 +99,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
         //And here, there are a lot of functions to be built...
         //setters for: cellType, xPosition, yPosition
         numAdj.push_back(temp_numAdj);
-        qDebug() << ID << ", " << temp_numAdj << ", " << castCellType;
+        //qDebug() << ID << ", " << temp_numAdj << ", " << castCellType;
 
         //cells.push_back(&temp_cell);//Are we only playing with addresses? This would not return a vector of Cell*.
         // There is no copy of information.
@@ -109,7 +109,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     for(unsigned long long int i = 0 ; i < size ; i++){
         for(int j = 0 ; j < numAdj[i] ; j++){
             fread(&tempID, sizeof(unsigned long long int), 1, fptr);
-            qDebug() << i << ", " << tempID;
+            //qDebug() << i << ", " << tempID;
             auto it = std::find_if(cells.begin(), cells.end(), [&tempID](Cell* goal) {return goal->getCellID() == tempID;});
             cells.at(i)->addAdjacent(*it);
         }

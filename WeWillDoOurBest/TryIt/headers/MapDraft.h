@@ -70,6 +70,7 @@ private:
     void handleConnectCell(QMouseEvent *event);
     void handleDisconnectCell(QMouseEvent *event);
     void deleteCell(Cell *cell);
+    void connectCell(Cell *&first, Cell *&second);
     Cell* last_choice;
     //std::vector<QLine> lines;
 public:

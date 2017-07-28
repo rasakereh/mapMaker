@@ -231,16 +231,21 @@ void MapDraft::handleConnectCell(QMouseEvent *event)
     }
     else
     {
+    connectCell(this -> last_choice, child);
+    this -> last_choice = nullptr;
+    }
+}
+
+void MapDraft::connectCell(Cell *&first, Cell *&second){
+
         //if(std::find_if())                    //Because temprorily we can not draw a line
 
-        this -> last_choice -> addAdjacent(child);
-        child -> addAdjacent(this -> last_choice);
-        this -> last_choice -> normalize();
+        first -> addAdjacent(second);
+        second -> addAdjacent(first);
+        first -> normalize();
      //   QLine line(child -> getXPos(), child -> getYPos(),
      //              this -> last_choice -> getXPos(), this -> last_choice -> getYPos());
      //   this->lines.push_back(line);
-        this -> last_choice = nullptr;
-    }
 }
 
 void MapDraft::handleDisconnectCell(QMouseEvent *event)

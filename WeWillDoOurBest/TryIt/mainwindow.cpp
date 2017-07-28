@@ -117,11 +117,36 @@ std::vector<Cell *> MainWindow::Load()
     SaverLoader sl;
     QString name = QFileDialog::getOpenFileName();
     std::vector<Cell *> result = sl.loadMap(name.toStdString());
+    std::vector<Cell *> tempList;
+    Cell *cur_cell = nullptr;
+    unsigned long long int tempID = 10000000000;
     for(auto it = this->ui->mapDraft_frm->cells.end() - 1 ; it != this->ui->mapDraft_frm->cells.begin() - 1 ; it--){
         this -> ui -> mapDraft_frm -> deleteCell(*it);
     }
     for(auto it = result.begin() ; it != result.end() ; it++ ){
         this -> ui -> mapDraft_frm -> addCell((*it)->getXPos() + WIDTHCELL/2, (*it)->getYPos() + HEIGHTCELL/2, (*it)->getCellType());
+        cur_cell = (*(this ->ui->mapDraft_frm->cells.end() - 1));
+        cur_cell -> setCellID( (*it) -> getCellID() );
+        //std::for_each(tempList.begin(), tempList.end(),cur_cell->addAdjacent);
     }
+    for(auto ott = this -> ui -> mapDraft_frm -> cells.begin() ; ott != this -> ui -> mapDraft_frm -> cells.end() ; ott++){
+        for(auto it = result.begin() ; it != result.end() ; it++ ){
+            tempList = (*it)->getAdjacentList();
+            for(auto op = tempList.begin() ; op != tempList.end() ; op++)
+            {
+                tempID = (*op) -> getCellID();
+
+                auto new_it = std::find_if(this ->ui->mapDraft_frm->cells.begin(),
+                                           this ->ui->mapDraft_frm->cells.end(),
+                                           [&tempID](Cell* goal)
+                                            {return goal->getCellID() == tempID;});
+
+                (*ott) -> addAdjacent(*new_it);
+            }
+        }
+    }
+    /*
+       MAST MALI SHADID
+    */
     return result;
 }
