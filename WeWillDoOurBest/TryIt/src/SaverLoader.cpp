@@ -13,7 +13,7 @@ SaverLoader::SaverLoader()
 
 void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cells){
     const char* char_file_name = file_name.c_str(); //convert cpp string to a char*
-    FILE* fptr = fopen(char_file_name,"w");   //Opens file for writing
+    FILE* fptr = fopen(char_file_name,"wb");   //Opens file for writing
     unsigned long long int size = cells.size();        // total number of cells
     unsigned long long int ID = 0;     // ID of a cell
     unsigned long long int tempAdjID = 0;
@@ -59,7 +59,7 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
 
 std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     const char* char_file_name = file_name.c_str();
-    FILE* fptr = fopen(char_file_name,"r");
+    FILE* fptr = fopen(char_file_name,"rb");
     std::vector<Cell*> cells;
 
     //IMPORTANT
@@ -101,7 +101,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
         //setters for: cellType, xPosition, yPosition
 
 
-        qDebug() << ID << ", " << temp_numAdj << ", " << castCellType;
+        //qDebug() << ID << ", " << temp_numAdj << ", " << castCellType;
 
         //cells.push_back(&temp_cell);//Are we only playing with addresses? This would not return a vector of Cell*.
         // There is no copy of information.

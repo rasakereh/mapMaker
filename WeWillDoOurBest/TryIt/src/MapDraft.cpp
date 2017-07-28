@@ -1,5 +1,6 @@
 #include "../headers/MapDraft.h"
-#include <QPainter>
+//#include <QPainter>
+#include <QDebug>
 /****************************************************************************
 **
 ** Copyright (C) 2016 The Qt Company Ltd.
@@ -231,8 +232,33 @@ void MapDraft::handleConnectCell(QMouseEvent *event)
     }
     else
     {
-    connectCell(this -> last_choice, child);
-    this -> last_choice = nullptr;
+        if(this -> last_choice -> cellType == Cell::INITIAL){
+            if(child -> cellType == Cell::INITIAL){
+                this -> last_choice -> normalize();
+                this -> last_choice = nullptr;
+                return;
+            }
+            else{
+                this->last_choice->addAdjacent(child);
+                this -> last_choice -> normalize();
+                this -> last_choice = nullptr;
+                return;
+            }
+        }
+        else{
+            if(child -> cellType == Cell::INITIAL){
+                child->addAdjacent(this->last_choice);
+                this -> last_choice -> normalize();
+                this -> last_choice = nullptr;
+                return;
+            }
+            else{
+                connectCell(this -> last_choice, child);
+                this -> last_choice = nullptr;
+                return;
+            }
+        }
+
     }
 }
 
