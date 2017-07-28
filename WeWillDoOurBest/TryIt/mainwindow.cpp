@@ -17,26 +17,61 @@ MainWindow::~MainWindow()
 
 void MainWindow::Connector()
 {
-    QObject::connect(this -> ui -> selectionTool_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::NOTYPE;} );
+    QObject::connect(this -> ui -> selectionTool_button, &QPushButton::clicked,[&]()
+    {
+        this -> ui -> mapDraft_frm ->current_choice = MapDraft::NOTYPE;
+        if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+            this -> ui -> mapDraft_frm -> last_choice -> normalize();
+        this -> ui -> mapDraft_frm -> last_choice = nullptr;
+    } );
     
-    QObject::connect(this -> ui -> ordinaryCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::ORDINARY;} );
+    QObject::connect(this -> ui -> ordinaryCell_button, &QPushButton::clicked,[&]()
+    {
+        this -> ui -> mapDraft_frm ->current_choice = MapDraft::ORDINARY;
+        if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+            this -> ui -> mapDraft_frm -> last_choice -> normalize();
+        this -> ui -> mapDraft_frm -> last_choice = nullptr;
+    } );
 
-    QObject::connect(this -> ui -> treasureCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::TREASURE;} );
+    QObject::connect(this -> ui -> treasureCell_button, &QPushButton::clicked,[&]()
+    {
+        this -> ui -> mapDraft_frm ->current_choice = MapDraft::TREASURE;
+        if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+            this -> ui -> mapDraft_frm -> last_choice -> normalize();
+        this -> ui -> mapDraft_frm -> last_choice = nullptr;
+    } );
 
-    QObject::connect(this -> ui -> initialCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::INITIAL;} );
+    QObject::connect(this -> ui -> initialCell_button, &QPushButton::clicked,[&]()
+    {
+        this -> ui -> mapDraft_frm ->current_choice = MapDraft::INITIAL;
+        if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+            this -> ui -> mapDraft_frm -> last_choice -> normalize();
+        this -> ui -> mapDraft_frm -> last_choice = nullptr;
+    } );
 
-    QObject::connect(this -> ui -> decisionCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::DECISION;} );
+    QObject::connect(this -> ui -> decisionCell_button, &QPushButton::clicked,[&]()
+    {
+        this -> ui -> mapDraft_frm ->current_choice = MapDraft::DECISION;
+        if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+            this -> ui -> mapDraft_frm -> last_choice -> normalize();
+        this -> ui -> mapDraft_frm -> last_choice = nullptr;
+    } );
 
-    QObject::connect(this -> ui -> transportCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::TRANSPORT;} );
+    QObject::connect(this -> ui -> transportCell_button, &QPushButton::clicked,[&]()
+    {
+        this -> ui -> mapDraft_frm ->current_choice = MapDraft::TRANSPORT;
+        if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+            this -> ui -> mapDraft_frm -> last_choice -> normalize();
+        this -> ui -> mapDraft_frm -> last_choice = nullptr;
+    } );
     
-    QObject::connect(this -> ui -> delete_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::DELETE_CELL;} );
+    QObject::connect(this -> ui -> delete_button, &QPushButton::clicked,[&]()
+        {
+            this -> ui -> mapDraft_frm ->current_choice = MapDraft::DELETE_CELL;
+            if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+                this -> ui -> mapDraft_frm -> last_choice -> normalize();
+            this -> ui -> mapDraft_frm -> last_choice = nullptr;
+        } );
 
     QObject::connect(this -> ui -> connect_button, &QPushButton::clicked,[&]()
         {
@@ -54,11 +89,20 @@ void MainWindow::Connector()
             this -> ui -> mapDraft_frm -> last_choice = nullptr;
         } );
 
-    QObject::connect(this -> ui -> save_button, &QPushButton::clicked,
-                     [&](){this->Save();});
+    QObject::connect(this -> ui -> save_button, &QPushButton::clicked,[&]()
+    {
+        this->Save();
+        if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+            this -> ui -> mapDraft_frm -> last_choice -> normalize();
+        this -> ui -> mapDraft_frm -> last_choice = nullptr;});
 
-    QObject::connect(this -> ui -> load_button, &QPushButton::clicked,
-                     [&](){this -> Load();});
+    QObject::connect(this -> ui -> load_button, &QPushButton::clicked,[&]()
+    {
+        this -> Load();
+        if (this -> ui -> mapDraft_frm -> last_choice != nullptr)
+            this -> ui -> mapDraft_frm -> last_choice -> normalize();
+        this -> ui -> mapDraft_frm -> last_choice = nullptr;
+    });
 }
 
 void MainWindow::Save()

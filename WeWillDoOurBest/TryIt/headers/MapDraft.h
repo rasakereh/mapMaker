@@ -71,7 +71,7 @@ private:
     void handleDisconnectCell(QMouseEvent *event);
     void deleteCell(Cell *cell);
     Cell* last_choice;
-    std::vector<QLine> lines;
+    //std::vector<QLine> lines;
 public:
     typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT,
                  NOTYPE, DELETE_CELL, CONNECT_CELL, DISCONNECT_CELL} ActionType;
@@ -84,7 +84,7 @@ protected:
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
+    //void paintEvent(QPaintEvent *event) override;
 };
 
 

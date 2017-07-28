@@ -116,7 +116,7 @@ void MapDraft::dropEvent(QDropEvent *event)
 void MapDraft::mousePressEvent(QMouseEvent *event)
 {
     if(this -> current_choice == MapDraft::NOTYPE){
-        this -> handleDragDrop(event);
+        //this -> handleDragDrop(event);
         return;
     }
     else if(this -> current_choice == MapDraft::DELETE_CELL){
@@ -236,8 +236,9 @@ void MapDraft::handleConnectCell(QMouseEvent *event)
         this -> last_choice -> addAdjacent(child);
         child -> addAdjacent(this -> last_choice);
         this -> last_choice -> normalize();
-        QLine line(child->pos(), this->last_choice->pos());
-        this->lines.push_back(line);
+     //   QLine line(child -> getXPos(), child -> getYPos(),
+     //              this -> last_choice -> getXPos(), this -> last_choice -> getYPos());
+     //   this->lines.push_back(line);
         this -> last_choice = nullptr;
     }
 }
@@ -269,12 +270,12 @@ void MapDraft::setAllCell(const std::vector<Cell *> &inputList)
     this->cells = inputList;
 }
 
-void MapDraft::paintEvent(QPaintEvent *event)
-{
-    QFrame::paintEvent(event);
-    QPainter painter(this);
-    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap));
-    for(auto it = lines.begin() ; it != lines.end() ; it++){
-        painter.drawLine(*it);
-    }
-}
+//void MapDraft::paintEvent(QPaintEvent *event)
+//{
+//    QFrame::paintEvent(event);
+//    QPainter painter(this);
+//    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap));
+//    for(auto it = lines.begin() ; it != lines.end() ; it++){
+//        painter.drawLine(*it);
+//    }
+//}
