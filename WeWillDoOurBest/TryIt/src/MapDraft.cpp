@@ -114,19 +114,22 @@ void MapDraft::dropEvent(QDropEvent *event)
 
 void MapDraft::mousePressEvent(QMouseEvent *event)
 {
-    if(this -> current_choice == Cell::NOTYPE){
+    if(this -> current_choice == MapDraft::NOTYPE){
         this -> handleDragDrop(event);
         return;
     }
+    else if(this -> current_choice == MapDraft::DELETE_CELL){
+        this -> handleDeleteCell(event);
+    }
     else{
-        this -> handleAddCell(event, current_choice);
+        this -> handleAddCell(event, (Cell::CellType)current_choice);
     }
 
 }
 
 void MapDraft::handleDragDrop(QMouseEvent *event)
 {
-    QLabel *child = static_cast<QLabel*>(childAt(event->pos()));
+    Cell *child = static_cast<Cell*>(childAt(event->pos()));
     if (!child)
         return;
 
@@ -162,7 +165,7 @@ void MapDraft::handleDragDrop(QMouseEvent *event)
 
 void MapDraft::handleAddCell(QMouseEvent *event, Cell::CellType cellType)
 {
-    QLabel *child = static_cast<QLabel*>(childAt(event->pos()));
+    Cell *child = static_cast<Cell*>(childAt(event->pos()));
     if (child)
         return;
     this -> addCell(event->x(), event->y(), cellType);
@@ -176,6 +179,25 @@ void MapDraft::addCell(int posX, int posY, Cell::CellType cellType)
     cellIcon->move(posX - WIDTHCELL/2, posY-HEIGHTCELL/2);
     cellIcon->show();
     cellIcon->setAttribute(Qt::WA_DeleteOnClose);
+}
+
+void MapDraft::handleDeleteCell(QMouseEvent *event)
+{
+    Cell *child = static_cast<Cell*>(childAt(event->pos()));
+    if(!child)
+        return ;
+    deleteCell(child);
+}
+
+void MapDraft::deleteCell(Cell *child)
+{
+    auto child_it = std::find(this -> cells.begin(), this -> cells.end(), child);
+    if(child_it != this -> cells.end())
+    {
+        this -> cells.erase(child_it);
+        for_each(this -> cells.begin(), this -> cells.end(), [&child](Cell *item){item -> removeAdjacent(child);});
+        child -> close();
+    }
 }
 
 std::vector<Cell *> MapDraft::getAllCell()

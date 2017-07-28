@@ -17,20 +17,26 @@ MainWindow::~MainWindow()
 
 void MainWindow::Connector()
 {
+    QObject::connect(this -> ui -> selectionTool_button, &QPushButton::clicked,
+                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::NOTYPE;} );
+    
     QObject::connect(this -> ui -> ordinaryCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = Cell::ORDINARY;} );
+                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::ORDINARY;} );
 
     QObject::connect(this -> ui -> treasureCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = Cell::TREASURE;} );
+                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::TREASURE;} );
 
     QObject::connect(this -> ui -> initialCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = Cell::INITIAL;} );
+                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::INITIAL;} );
 
     QObject::connect(this -> ui -> decisionCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = Cell::DECISION;} );
+                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::DECISION;} );
 
     QObject::connect(this -> ui -> transportCell_button, &QPushButton::clicked,
-                     [&](){this -> ui -> mapDraft_frm ->current_choice = Cell::TRANSPORT;} );
+                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::TRANSPORT;} );
+    
+    QObject::connect(this -> ui -> delete_button, &QPushButton::clicked,
+                     [&](){this -> ui -> mapDraft_frm ->current_choice = MapDraft::DELETE_CELL;} );
 
     QObject::connect(this -> ui -> save_button, &QPushButton::clicked,
                      [&](){this->Save();});

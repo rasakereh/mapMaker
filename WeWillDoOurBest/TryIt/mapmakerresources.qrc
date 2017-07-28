@@ -5,5 +5,7 @@
         <file>icons/OrdinaryCell.png</file>
         <file>icons/TransportCell.png</file>
         <file>icons/TreasureCell.png</file>
+        <file>icons/Delete.png</file>
+        <file>icons/SelectionTool.png</file>
     </qresource>
 </RCC>

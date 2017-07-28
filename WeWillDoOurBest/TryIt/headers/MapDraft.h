@@ -69,11 +69,14 @@ private:
     void handleDragDrop(QMouseEvent *event);
     void handleAddCell(QMouseEvent *event, Cell::CellType cellType);
     void addCell(int posX, int posY, Cell::CellType cellType);
+    void handleDeleteCell(QMouseEvent *event);
+    void deleteCell(Cell *cell);
 public:
+    typedef enum{ORDINARY, TREASURE, INITIAL, DECISION, TRANSPORT, NOTYPE, DELETE_CELL} ActionType;
     std::vector<Cell *> getAllCell();
     void setAllCell(std::vector<Cell *> inputList);
     MapDraft(QWidget *parent = 0);
-    Cell::CellType current_choice = Cell::NOTYPE;
+    MapDraft::ActionType current_choice = MapDraft::NOTYPE;
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;

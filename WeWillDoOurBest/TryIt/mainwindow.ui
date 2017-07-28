@@ -20,9 +20,9 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>100</x>
       <y>0</y>
-      <width>464</width>
+      <width>642</width>
       <height>41</height>
      </rect>
     </property>
@@ -30,6 +30,23 @@
      <property name="bottomMargin">
       <number>5</number>
      </property>
+     <item>
+      <widget class="QPushButton" name="selectionTool_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>SelectionTool</string>
+       </property>
+       <property name="icon">
+        <iconset resource="mapmakerresources.qrc">
+         <normaloff>:/icons/SelectionTool.png</normaloff>:/icons/SelectionTool.png</iconset>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QPushButton" name="ordinaryCell_button">
        <property name="sizePolicy">
@@ -127,6 +144,23 @@
        <property name="icon">
         <iconset resource="mapmakerresources.qrc">
          <normaloff>:/icons/TransportCell.png</normaloff>:/icons/TransportCell.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="delete_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+       <property name="icon">
+        <iconset resource="mapmakerresources.qrc">
+         <normaloff>:/icons/Delete.png</normaloff>:/icons/Delete.png</iconset>
        </property>
       </widget>
      </item>
