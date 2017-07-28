@@ -231,20 +231,13 @@ void MapDraft::handleConnectCell(QMouseEvent *event)
     }
     else
     {
-        //QLine* line = new QLine(this->last_choice->pos(), child->pos());
-        //QPainter p(this);
-        //p.setRenderHint(QPainter::Antialiasing);
-        //p.setPen(QPen(Qt::black, 12, Qt::DotLine, Qt::RoundCap));
-        //p.drawLine(*line);
-        //p.end();
-
-        //QPaintEngine* u = this->paintEngine();
-        //u->drawLines(line, 1);
         //if(std::find_if())                    //Because temprorily we can not draw a line
 
         this -> last_choice -> addAdjacent(child);
         child -> addAdjacent(this -> last_choice);
-        this -> last_choice -> loadImage();
+        this -> last_choice -> normalize();
+        QLine line(child->pos(), this->last_choice->pos());
+        this->lines.push_back(line);
         this -> last_choice = nullptr;
     }
 }
@@ -274,4 +267,14 @@ const std::vector<Cell *> &MapDraft::getAllCell()
 void MapDraft::setAllCell(const std::vector<Cell *> &inputList)
 {
     this->cells = inputList;
+}
+
+void MapDraft::paintEvent(QPaintEvent *event)
+{
+    QFrame::paintEvent(event);
+    QPainter painter(this);
+    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap));
+    for(auto it = lines.begin() ; it != lines.end() ; it++){
+        painter.drawLine(*it);
+    }
 }

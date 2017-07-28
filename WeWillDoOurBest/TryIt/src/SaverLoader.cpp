@@ -15,6 +15,7 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
     unsigned long long int size = cells.size();        // total number of cells
     unsigned long long int ID = 0;     // ID of a cell
     unsigned long long int tempAdjID = 0;
+    int castCellType = 0;
     std::vector<Cell*> adjacent_list;   // list of adjacents to a cell
     int numAdj = 0;         // number of neighbours
     int xPos = 0 , yPos = 0;         // Coordinates
@@ -28,12 +29,13 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
         adjacent_list = cells[i] -> getAdjacentList();
         numAdj = adjacent_list.size();
         what_is_type = cells[i] -> getCellType();
+        castCellType = static_cast<int>(what_is_type);
         xPos = cells[i] -> getXPos();
         yPos = cells[i] -> getYPos();
 
         fwrite(&ID, sizeof(unsigned long long int), 1, fptr);
         fwrite(&numAdj, sizeof(int), 1, fptr);
-        fwrite(&what_is_type, sizeof(Cell::CellType), 1, fptr);
+        fwrite(&castCellType, sizeof(int), 1, fptr);
         fwrite(&xPos, sizeof(int), 1, fptr);
         fwrite(&yPos, sizeof(int), 1, fptr);
 
@@ -65,13 +67,17 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     std::vector<int> numAdj;
     int temp_numAdj = 0;
     int xPos = 0 , yPos = 0;
+    int castCellType = 0;
     Cell::CellType what_is_type = Cell::ORDINARY;
     fread(&size, sizeof(unsigned long long int), 1, fptr);
     for(unsigned long long int i = 0 ; i < size ; i++){
 
         fread(&ID, sizeof(unsigned long long int), 1, fptr);
         fread(&temp_numAdj, sizeof(int), 1, fptr);
-        fread(&what_is_type, sizeof(Cell::CellType), 1, fptr);
+
+        fread(&castCellType, sizeof(int), 1, fptr);
+        what_is_type = static_cast<Cell::CellType>(castCellType);
+
         fread(&xPos, sizeof(int), 1, fptr);
         fread(&yPos, sizeof(int), 1, fptr);
         temp = new Cell(what_is_type);
