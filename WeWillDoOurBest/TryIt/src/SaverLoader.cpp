@@ -70,7 +70,7 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
     unsigned long long int size = 0;
     unsigned long long int ID = 0;
     unsigned long long int tempID = 0;
-    std::vector<Cell*> adjacent_list;
+    //std::vector<Cell*> adjacent_list;
     std::vector<int> numAdj;
     int temp_numAdj = 0;
     int xPos = 0 , yPos = 0;
@@ -92,14 +92,16 @@ std::vector<Cell*> SaverLoader::loadMap(std::string file_name){
         temp->setCellID(ID);
         temp->setPos(xPos, yPos);
         cells.push_back(temp);
+        numAdj.push_back(temp_numAdj);
 
         // I temprorily made this functin friend with Cell class. For escaping from compile errors. :)
         //You, HajReza, may want to set a new function for this action! :)
 
         //And here, there are a lot of functions to be built...
         //setters for: cellType, xPosition, yPosition
-        numAdj.push_back(temp_numAdj);
-        //qDebug() << ID << ", " << temp_numAdj << ", " << castCellType;
+
+
+        qDebug() << ID << ", " << temp_numAdj << ", " << castCellType;
 
         //cells.push_back(&temp_cell);//Are we only playing with addresses? This would not return a vector of Cell*.
         // There is no copy of information.
