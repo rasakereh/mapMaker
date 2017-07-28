@@ -19,7 +19,8 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
     unsigned long long int tempAdjID = 0;
     int castCellType = 0;
     std::vector<Cell*> adjacent_list;   // list of adjacents to a cell
-    int numAdj = 0;         // number of neighbours
+    std::vector<int> numAdj;
+    int temp_numAdj = 0;         // number of neighbours
     int xPos = 0 , yPos = 0;         // Coordinates
     Cell::CellType what_is_type = Cell::ORDINARY;   //type of a cell
     fwrite(&size, sizeof(unsigned long long int), 1, fptr);
@@ -30,7 +31,8 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
         //getters for: adjacentList, cellType, xPosition, yPosition.
         ID = cells[i] -> getCellID();
         adjacent_list = cells[i] -> getAdjacentList();
-        numAdj = adjacent_list.size();
+        temp_numAdj = adjacent_list.size();
+        numAdj.push_back(temp_numAdj);
         what_is_type = cells[i] -> getCellType();
         castCellType = static_cast<int>(what_is_type);
         xPos = cells[i] -> getXPos();
@@ -46,7 +48,7 @@ void SaverLoader::saveMap(std::string file_name, const std::vector<Cell *> &cell
     } //End of loop  (for writing properties of a Cell)
     for(unsigned long long int i = 0 ; i < size ; i++){
         adjacent_list = cells[i]->getAdjacentList();
-        for(int j = 0 ; j < numAdj ; j++){
+        for(int j = 0 ; j < numAdj[i] ; j++){
             tempAdjID = adjacent_list[j]->getCellID();
             qDebug() << i << ", " << tempAdjID;
             fwrite( &tempAdjID, sizeof(unsigned long long int), 1, fptr );
